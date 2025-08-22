@@ -7,7 +7,7 @@ export default function Index() {
     <Text>Week 1</Text>
     <Link href="/hello" style={styles.link}>Hello World!</Link>
     <Link href="/calculator" style={styles.link}>Calculator</Link>
-    <Link href="/" style={styles.link}>Guessing game</Link>
+    <Link href="/guess" style={styles.link}>Guessing game</Link>
   </View>;
 }
 

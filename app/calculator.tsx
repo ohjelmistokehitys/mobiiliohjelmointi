@@ -8,11 +8,17 @@ export default function Calculator() {
   const [output, setOutput] = useState("");
 
   function calculate(operation: "+" | "-") {
-    if (operation === "+") {
-      setOutput(`${a} + ${b} = ${Number(a) + Number(b)}`);
-    } else {
-      setOutput(`${a} - ${b} = ${Number(a) - Number(b)}`);
+    const numA = +a;
+    const numB = +b;
+
+    const result = operation === "+" ? numA + numB : numA - numB;
+
+    if (isNaN(result)) {
+      setOutput("Invalid numbers");
+      return;
     }
+
+    setOutput(`${a} ${operation} ${b} = ${result}`);
   }
 
   return <View style={styles.container}>
