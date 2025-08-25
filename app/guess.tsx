@@ -1,3 +1,4 @@
+import Title from "@/components/Title";
 import { useEffect, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -44,7 +45,7 @@ export default function GuessingGame() {
   useEffect(() => newGame(), []);
 
   return <View style={styles.container}>
-    <Text>Guessing Game</Text>
+    <Title>Guessing Game</Title>
 
     <TextInput
       style={styles.input}

@@ -8,6 +8,9 @@ export default function Index() {
     <Link href="/hello" style={styles.link}>Hello World!</Link>
     <Link href="/calculator" style={styles.link}>Calculator</Link>
     <Link href="/guess" style={styles.link}>Guessing game</Link>
+
+    <Text>Week 2</Text>
+    <Link href="/articles" style={styles.link}>Articles</Link>
   </View>;
 }
 
