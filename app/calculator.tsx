@@ -13,25 +13,24 @@ export default function Calculator() {
 
     const result = operation === "+" ? numA + numB : numA - numB;
 
-    if (isNaN(result)) {
-      setOutput("Invalid numbers");
-      return;
+    if (Number.isNaN(result)) {
+      setOutput(`Please input a valid number`);
+    } else {
+      setOutput(`${a} ${operation} ${b} = ${result}`);
     }
-
-    setOutput(`${a} ${operation} ${b} = ${result}`);
   }
 
   return <View style={styles.container}>
     <Text>Calculator</Text>
     <TextInput
-      value={a.toString()}
+      value={a}
       style={styles.input}
       placeholder="Enter a number"
       keyboardType="numeric"
       onChangeText={text => setA(text)}
     />
     <TextInput
-      value={b.toString()}
+      value={b}
       style={styles.input}
       placeholder="Enter a number"
       keyboardType="numeric"

@@ -12,7 +12,7 @@ export default function GuessingGame() {
 
   function newGame() {
     const random = 1 + Math.floor(Math.random() * 100);
-    console.log(random);
+    console.log("Correct answer is " + random);
 
     setCorrect(random);
     setGuesses(0);
@@ -22,7 +22,8 @@ export default function GuessingGame() {
   }
 
   function makeGuess() {
-    const guess = Number(input);
+    debugger
+    const guess = +input;
 
     if (isNaN(guess)) {
       setMessage("Please enter a valid number.");
@@ -58,6 +59,7 @@ export default function GuessingGame() {
 
     <Text>Guesses: {guesses}</Text>
     <Text>{message}</Text>
+
   </View>;
 }
 
