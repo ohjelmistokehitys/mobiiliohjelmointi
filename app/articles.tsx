@@ -1,15 +1,16 @@
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import { FlatList, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import articleJson from "../articles.json";
 
 export default function Articles() {
     return <Container>
-        <Title>Yle news</Title>
+        <Title>Articles</Title>
 
         <FlatList
             data={articleJson}
-            renderItem={({ item }) => <Article article={item} />}
+            renderItem={({ item }) => <ListArticle article={item} />}
         />
     </Container>;
 }
@@ -18,9 +19,25 @@ type ArticleProps = {
     article: typeof articleJson[number];
 }
 
-function Article({ article }: ArticleProps) {
-    return <View style={{ marginBottom: 10 }}>
-        <Text style={{ fontWeight: "bold" }}>{article.title}</Text>
-        <Text>{article.lead}</Text>
-    </View>;
+function ListArticle({ article }: ArticleProps) {
+    return (
+        <Link href={`/article/${article.id}`}>
+            <View style={articleStyles.container}>
+                <Text style={articleStyles.title}>{article.title}</Text>
+                <Text style={articleStyles.lead}>{article.lead}</Text>
+            </View>
+        </Link>
+    );
 }
+
+const articleStyles = StyleSheet.create({
+    container: {
+        paddingBottom: 15
+    },
+    title: {
+        fontWeight: "bold"
+    },
+    lead: {
+        color: "#666"
+    }
+});

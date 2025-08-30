@@ -7,7 +7,7 @@ export default function Container({ children }: ViewProps) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#ccccff",
+        backgroundColor: "#eeeeee",
         padding: 10,
         gap: 10,
         justifyContent: "flex-start",

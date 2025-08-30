@@ -10,6 +10,7 @@ export default function Title({ children }: TitleProps) {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 25
+        fontSize: 25,
+        marginVertical: 20,
     }
 });
