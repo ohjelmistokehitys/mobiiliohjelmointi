@@ -1,17 +1,28 @@
-import { Link } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import Container from "@/components/Container";
+import { Link, Stack } from "expo-router";
+import { StyleSheet, Text } from "react-native";
 
 export default function Index() {
 
-  return <View style={styles.container}>
-    <Text>Week 1</Text>
-    <Link href="/hello" style={styles.link}>Hello World!</Link>
-    <Link href="/calculator" style={styles.link}>Calculator</Link>
-    <Link href="/guess" style={styles.link}>Guessing game</Link>
+  return (
+    <Container style={styles.container}>
+      <Stack.Screen options={{ title: "Home" }} />
 
-    <Text>Week 2</Text>
-    <Link href="/articles" style={styles.link}>Articles</Link>
-  </View>;
+      <Text>Week 1</Text>
+      <Link href="/hello" style={styles.link}>Hello World!</Link>
+      <Link href="/calculator" style={styles.link}>Calculator</Link>
+      <Link href="/guess" style={styles.link}>Guessing game</Link>
+
+      <Text>Week 2</Text>
+      <Link href="/articles" style={styles.link}>Articles</Link>
+      <Link href="/calculator" style={styles.link}>Calculator with history</Link>
+      <Link href="/shopping" style={styles.link}>Shopping list</Link>
+
+      <Text>Week 3</Text>
+      <Link href="/articles" style={styles.link}>Articles with navigation</Link>
+      <Link href="/icons" style={styles.link}>Icons</Link>
+    </Container>
+  );
 }
 
 

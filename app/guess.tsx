@@ -1,6 +1,10 @@
+import Container from "@/components/Container";
+import MyButton from "@/components/MyButton";
+import MyButtonGroup from "@/components/MyButtonGroup";
+import MyInput from "@/components/MyInput";
 import Title from "@/components/Title";
 import { useEffect, useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Text } from "react-native";
 
 
 export default function GuessingGame() {
@@ -44,38 +48,24 @@ export default function GuessingGame() {
 
   useEffect(() => newGame(), []);
 
-  return <View style={styles.container}>
+  return <Container>
     <Title>Guessing Game</Title>
 
-    <TextInput
-      style={styles.input}
-      value={input} onChangeText={setInput}
+    <MyInput
+      value={input}
+      onChangeText={setInput}
       keyboardType="numeric"
       placeholder="Guess a number between 1-100!"
       editable={gameOn}
     />
 
-    <Button title="Guess!" onPress={makeGuess} disabled={!gameOn} />
-    <Button title="Start a new game" onPress={newGame} />
+    <MyButtonGroup>
+      <MyButton onPress={makeGuess} disabled={!gameOn}>Guess!</MyButton>
+      <MyButton onPress={newGame}>Start a new game</MyButton>
+    </MyButtonGroup>
 
     <Text>Guesses: {guesses}</Text>
     <Text>{message}</Text>
 
-  </View>;
+  </Container>;
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "silver",
-    padding: 10,
-    gap: 10,
-    justifyContent: "center",
-    flex: 1
-  },
-  input: {
-    borderColor: "black",
-    borderWidth: 1,
-    backgroundColor: "white"
-  }
-});

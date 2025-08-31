@@ -8,9 +8,10 @@
  */
 
 import Container from "@/components/Container";
+import MyButton from "@/components/MyButton";
 import Title from "@/components/Title";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Button, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import articleJson from "../../articles.json";
 
 export default function Article() {
@@ -36,7 +37,7 @@ export default function Article() {
 
         <Text style={styles.body}>{article.body}</Text>
 
-        <Button onPress={() => navigation.goBack()} title="Back to Articles" />
+        <MyButton onPress={() => navigation.goBack()}>Back to Articles</MyButton>
     </Container>;
 }
 

@@ -1,68 +1,66 @@
+import Container from "@/components/Container";
+import MyButton from "@/components/MyButton";
+import MyButtonGroup from "@/components/MyButtonGroup";
+import MyInput from "@/components/MyInput";
+import Title from "@/components/Title";
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, FlatList, Text } from "react-native";
 
+type Calculation = {
+    a: number;
+    b: number;
+    operation: "+" | "-";
+    result: number;
+};
 
 export default function Calculator() {
-  const [a, setA] = useState("0");
-  const [b, setB] = useState("0");
-  const [output, setOutput] = useState("");
+    const [a, setA] = useState("0");
+    const [b, setB] = useState("0");
+    const [calculations, setCalculations] = useState<Calculation[]>([]);
 
-  function calculate(operation: "+" | "-") {
-    const numA = +a;
-    const numB = +b;
+    function calculate(operation: "+" | "-") {
+        const numA = +a;
+        const numB = +b;
 
-    const result = operation === "+" ? numA + numB : numA - numB;
+        const result = operation === "+" ? numA + numB : numA - numB;
 
-    if (Number.isNaN(result)) {
-      setOutput(`Please input a valid number`);
-    } else {
-      setOutput(`${a} ${operation} ${b} = ${result}`);
+        if (Number.isNaN(result)) {
+            Alert.alert(`Please input a valid number`);
+        } else {
+            setCalculations([...calculations, { a: numA, b: numB, operation, result }]);
+        }
     }
-  }
 
-  return <View style={styles.container}>
-    <Text>Calculator</Text>
-    <TextInput
-      value={a}
-      style={styles.input}
-      placeholder="Enter a number"
-      keyboardType="numeric"
-      onChangeText={text => setA(text)}
-    />
-    <TextInput
-      value={b}
-      style={styles.input}
-      placeholder="Enter a number"
-      keyboardType="numeric"
-      onChangeText={text => setB(text)}
-    />
+    return (
+        <Container>
+            <Title>Calculator</Title>
+            <MyInput
+                value={a}
+                placeholder="Enter a number"
+                keyboardType="numeric"
+                onChangeText={text => setA(text)}
+            />
+            <MyInput
+                value={b}
+                placeholder="Enter a number"
+                keyboardType="numeric"
+                onChangeText={text => setB(text)}
+            />
 
-    <View style={styles.buttonContainer}>
-      <Button title="+" onPress={() => calculate("+")} />
-      <Button title="-" onPress={() => calculate("-")} />
-    </View>
-    <Text>Result: {output}</Text>
+            <MyButtonGroup>
+                <MyButton onPress={() => calculate("+")}>+</MyButton>
+                <MyButton onPress={() => calculate("-")}>-</MyButton>
+            </MyButtonGroup>
 
-  </View>;
+            <Text>Result(s):</Text>
+
+            <FlatList
+                data={calculations.toReversed()}
+                keyExtractor={(_, index) => index.toString()}
+                renderItem={({ item }) => (
+                    <Text>{item.a} {item.operation} {item.b} = {item.result}</Text>
+                )} />
+
+        </Container>
+    );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "silver",
-    padding: 10,
-    gap: 10,
-    justifyContent: "center",
-    flex: 1
-  },
-  input: {
-    borderColor: "black",
-    borderWidth: 1,
-    backgroundColor: "white"
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 20
-  }
-});
