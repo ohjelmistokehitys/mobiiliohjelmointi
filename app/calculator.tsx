@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from "react-native";
 
 
 export default function Calculator() {
@@ -20,30 +20,32 @@ export default function Calculator() {
     }
   }
 
-  return <View style={styles.container}>
-    <Text>Calculator</Text>
-    <TextInput
-      value={a}
-      style={styles.input}
-      placeholder="Enter a number"
-      keyboardType="numeric"
-      onChangeText={text => setA(text)}
-    />
-    <TextInput
-      value={b}
-      style={styles.input}
-      placeholder="Enter a number"
-      keyboardType="numeric"
-      onChangeText={text => setB(text)}
-    />
+  return <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+    <View style={styles.container}>
+      <Text>Calculator</Text>
+      <TextInput
+        value={a}
+        style={styles.input}
+        placeholder="Enter a number"
+        keyboardType="numeric"
+        onChangeText={text => setA(text)}
+      />
+      <TextInput
+        value={b}
+        style={styles.input}
+        placeholder="Enter a number"
+        keyboardType="numeric"
+        onChangeText={text => setB(text)}
+      />
 
-    <View style={styles.buttonContainer}>
-      <Button title="+" onPress={() => calculate("+")} />
-      <Button title="-" onPress={() => calculate("-")} />
+      <View style={styles.buttonContainer}>
+        <Button title="+" onPress={() => calculate("+")} />
+        <Button title="-" onPress={() => calculate("-")} />
+      </View>
+      <Text>Result: {output}</Text>
+
     </View>
-    <Text>Result: {output}</Text>
-
-  </View>;
+  </KeyboardAvoidingView>;
 }
 
 

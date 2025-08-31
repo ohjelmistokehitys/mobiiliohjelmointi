@@ -9,14 +9,17 @@
 
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Button, StyleSheet, Text } from "react-native";
 import articleJson from "../../articles.json";
+
 
 export default function Article() {
 
     // The route parameters can be accessed using the useLocalSearchParams hook
-    const { articleId } = useLocalSearchParams();
+    const route = useRoute();
+
+    const { articleId } = route.params as { articleId: string };
 
     // The navigation object can be used to navigate between screens programmatically
     const navigation = useNavigation();

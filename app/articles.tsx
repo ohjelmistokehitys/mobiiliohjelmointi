@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import { Link } from "expo-router";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "expo-router";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import articleJson from "../articles.json";
 
 export default function Articles() {
@@ -20,13 +20,15 @@ type ArticleProps = {
 }
 
 function ListArticle({ article }: ArticleProps) {
+    const navigation = useNavigation<any>();
+
     return (
-        <Link href={`/article/${article.id}`}>
+        <TouchableOpacity onPress={() => navigation.navigate(`Article`, { articleId: article.id })}>
             <View style={articleStyles.container}>
                 <Text style={articleStyles.title}>{article.title}</Text>
                 <Text style={articleStyles.lead}>{article.lead}</Text>
             </View>
-        </Link>
+        </TouchableOpacity>
     );
 }
 
