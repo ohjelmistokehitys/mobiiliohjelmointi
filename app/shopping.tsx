@@ -13,8 +13,8 @@ export default function ShoppingList() {
     const [items, setItems] = useState<string[]>([]);
 
     const addItem = () => {
-        if (text.trim()) {
-            setItems([...items, text.trim()]);
+        if (text) {
+            setItems(items.concat(text));
             setText("");
         }
     };

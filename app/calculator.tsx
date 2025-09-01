@@ -59,7 +59,8 @@ export default function Calculator() {
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item }) => (
                     <Text>{item.a} {item.operation} {item.b} = {item.result}</Text>
-                )} />
+                )}
+            />
 
         </Container>
     );
