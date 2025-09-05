@@ -12,7 +12,7 @@ export type Calculation = {
 
 /**
  * Calculation history consists of two parts: the history as an array,
- * and a function to add new calculations to the history.
+ * and two functions to modify it (add a new calculation and clear the history).
  */
 type CalculationHistoryContext = {
     history: Calculation[];
