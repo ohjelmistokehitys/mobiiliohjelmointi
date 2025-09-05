@@ -5,9 +5,7 @@ type TitleProps = {
 }
 
 export default function Title({ children }: TitleProps) {
-    return <>
-        <Text style={styles.title}>{children}</Text>;
-    </>
+    return <Text style={styles.title}>{children}</Text>;
 }
 
 const styles = StyleSheet.create({

@@ -3,20 +3,20 @@ import MyButton from "@/components/MyButton";
 import MyButtonGroup from "@/components/MyButtonGroup";
 import MyInput from "@/components/MyInput";
 import Title from "@/components/Title";
+import { useCalculationHistory } from "@/contexts/calculatorContext";
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, FlatList, Text } from "react-native";
+import { Alert, Text } from "react-native";
 
-type Calculation = {
-    a: number;
-    b: number;
-    operation: "+" | "-";
-    result: number;
-};
 
 export default function Calculator() {
     const [a, setA] = useState("0");
     const [b, setB] = useState("0");
-    const [calculations, setCalculations] = useState<Calculation[]>([]);
+
+    const { history, add } = useCalculationHistory();
+    const router = useRouter();
+
+    const result = history.at(-1);
 
     function calculate(operation: "+" | "-") {
         const numA = +a;
@@ -27,7 +27,7 @@ export default function Calculator() {
         if (Number.isNaN(result)) {
             Alert.alert(`Please input a valid number`);
         } else {
-            setCalculations([...calculations, { a: numA, b: numB, operation, result }]);
+            add({ a: numA, b: numB, operation, result });
         }
     }
 
@@ -47,21 +47,20 @@ export default function Calculator() {
                 onChangeText={text => setB(text)}
             />
 
+            {result ? (
+                <>
+                    <Text>Result:</Text>
+                    <Text>{result.a} {result.operation} {result.b} = {result.result}</Text>
+                </>
+            ) : (
+                <Text>No calculations yet</Text>
+            )}
+
             <MyButtonGroup>
                 <MyButton onPress={() => calculate("+")}>+</MyButton>
                 <MyButton onPress={() => calculate("-")}>-</MyButton>
+                <MyButton onPress={() => router.navigate("/calculatorHistory")}>See history</MyButton>
             </MyButtonGroup>
-
-            <Text>Result(s):</Text>
-
-            <FlatList
-                data={calculations.toReversed()}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item }) => (
-                    <Text>{item.a} {item.operation} {item.b} = {item.result}</Text>
-                )}
-            />
-
         </Container>
     );
 }
