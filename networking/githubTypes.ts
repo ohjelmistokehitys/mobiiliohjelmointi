@@ -9,7 +9,7 @@ export interface RepoSearchResultItem {
     node_id: string;
     name: string;
     full_name: string;
-    owner: SimpleUser | null;
+    owner?: SimpleUser;
     private: boolean;
     html_url: string;
     description: string | null;
@@ -102,8 +102,8 @@ export interface RepoSearchResultItem {
 }
 
 export interface SimpleUser {
-    name: string | null;
-    email: string | null;
+    name?: string;
+    email?: string;
     login: string;
     id: number;
     node_id: string;
@@ -132,7 +132,7 @@ export interface LicenseSimple {
     url: string | null;
     spdx_id: string | null;
     node_id: string;
-    html_url: string;
+    html_url?: string;
 }
 
 export interface RepoPermissions {

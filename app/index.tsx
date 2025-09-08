@@ -24,6 +24,9 @@ export default function Index() {
 
       <Text>Week 4</Text>
       <Link href="/calculator" style={styles.link}>Calculator with navigation</Link>
+
+      <Text>Week 5</Text>
+      <Link href="/repositories" style={styles.link}>Repository search</Link>
     </Container>
   );
 }
