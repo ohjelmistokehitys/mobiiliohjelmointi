@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 import { KeyboardAvoidingView, Platform } from "react-native";
 
 export default function RootLayout() {
-  return <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+  return <KeyboardAvoidingView style={{ flex: 1, marginBottom: 50 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
     <CalculationHistoryProvider>
       <Stack />
     </CalculationHistoryProvider>

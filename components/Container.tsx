@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#eeeeee",
         padding: 10,
-        paddingBottom: 50,
         gap: 10,
         justifyContent: "flex-start",
         flex: 1
