@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import Title from "@/components/Title";
 import { Link } from "expo-router";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import articleJson from "../articles.json";
+import articleJson from "../../articles.json";
 
 export default function Articles() {
     return <Container>

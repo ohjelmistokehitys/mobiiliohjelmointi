@@ -12,7 +12,7 @@ import MyButton from "@/components/MyButton";
 import Title from "@/components/Title";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { StyleSheet, Text } from "react-native";
-import articleJson from "../../articles.json";
+import articleJson from "../../../articles.json";
 
 export default function Article() {
 

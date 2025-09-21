@@ -11,7 +11,7 @@ type MyInputProps = {
 export default function MyInput({ value, onChangeText, keyboardType = "default", placeholder, editable = true }: MyInputProps) {
     return <TextInput
         value={value}
-        style={styles.input}
+        style={inputStyles.input}
         placeholder={placeholder}
         keyboardType={keyboardType}
         editable={editable}
@@ -19,7 +19,7 @@ export default function MyInput({ value, onChangeText, keyboardType = "default",
     />;
 }
 
-const styles = StyleSheet.create({
+export const inputStyles = StyleSheet.create({
     input: {
         borderColor: "black",
         padding: 10,

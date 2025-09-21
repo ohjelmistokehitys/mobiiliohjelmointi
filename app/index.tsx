@@ -9,30 +9,29 @@ export default function Index() {
       <Container>
         <Stack.Screen options={{ title: "Home" }} />
 
-        <Text>Week 1</Text>
+        <Text>Basics</Text>
         <Link href="/hello" style={styles.link}>Hello World!</Link>
         <Link href="/calculator" style={styles.link}>Calculator</Link>
         <Link href="/guess" style={styles.link}>Guessing game</Link>
 
-        <Text>Week 2</Text>
+        <Text>Lists</Text>
         <Link href="/articles" style={styles.link}>Articles</Link>
         <Link href="/calculator" style={styles.link}>Calculator with history</Link>
         <Link href="/shopping" style={styles.link}>Shopping list</Link>
 
-        <Text>Week 3</Text>
+        <Text>Navigation</Text>
         <Link href="/articles" style={styles.link}>Articles with navigation</Link>
         <Link href="/icons" style={styles.link}>Icons</Link>
-
-        <Text>Week 4</Text>
         <Link href="/calculator" style={styles.link}>Calculator with navigation</Link>
 
-        <Text>Week 5</Text>
+        <Text>Networking</Text>
         <Link href="/repositories" style={styles.link}>Repository search</Link>
         <Link href="/recipes" style={styles.link}>Recipes</Link>
         <Link href="/currencies" style={styles.link}>Currency converter</Link>
 
-        <Text>Week 6</Text>
-        <Link href="/" style={styles.link}>Maps</Link>
+        <Text>Maps</Text>
+        <Link href="/citybikes" style={styles.link}>City bikes</Link>
+        <Link href="/addressSearch" style={styles.link}>Address search</Link>
       </Container>
     </ScrollView>
   );
