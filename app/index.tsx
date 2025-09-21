@@ -32,6 +32,11 @@ export default function Index() {
         <Text>Maps</Text>
         <Link href="/citybikes" style={styles.link}>City bikes</Link>
         <Link href="/addressSearch" style={styles.link}>Address search</Link>
+
+        <Text>Persistence</Text>
+        <Link href="/asyncStorage" style={styles.link}>AsyncStorage</Link>
+        <Link href="/sqlite" style={styles.link}>SQLite</Link>
+        <Link href="/firebaseShoppingList" style={styles.link}>Firebase Shopping List</Link>
       </Container>
     </ScrollView>
   );

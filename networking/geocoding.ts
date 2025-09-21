@@ -9,7 +9,7 @@ if (!API_KEY) {
     console.warn("EXPO_PUBLIC_DIGITRANSIT_API_KEY not defined in environment variables");
 }
 
-export async function getCityBikes(): Promise<GeoJSON.Feature[]> {
+export async function getCityBikes(): Promise<GeoJSON.Feature<GeoJSON.Point>[]> {
     const response = await fetch(API_URL);
     if (!response.ok) {
         const msg = `City bikes request failed with ${response.status}`;
@@ -54,7 +54,7 @@ export function convertToMarker(result: GeoJSON.Feature<GeoJSON.Point>): MapMark
 }
 
 
-// The full response schema returned by digitransit
+/** The full response schema returned by digitransit */
 type StopsByRadiusResponse = {
     data: {
         stopsByRadius: {

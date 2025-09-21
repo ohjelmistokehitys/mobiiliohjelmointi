@@ -29,7 +29,8 @@ export default function RecipeSearch() {
             let json = await response.json();
             setRecipes(json.meals ?? []);
         } catch (e) {
-            Alert.alert(`Search failed`)
+            console.error(e);
+            Alert.alert(`Search failed.`);
         } finally {
             setLoading(false);
         }
