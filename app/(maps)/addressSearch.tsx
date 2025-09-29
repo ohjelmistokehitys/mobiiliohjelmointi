@@ -23,6 +23,7 @@ export default function AddressSearch() {
     async function locateUser() {
         try {
             const coordinate = await getUserLocation();
+            console.log("coordinate", coordinate);
             setMarker({ coordinate, title: "Your location", description: "" });
         } catch (e) {
             console.error(e);
@@ -72,6 +73,7 @@ async function getUserLocation(): Promise<LatLng> {
     const { status } = await requestForegroundPermissionsAsync();
     if (status !== "granted") {
         Alert.alert(`Could not get permission. (${status})`);
+        throw new Error(`Could not get permission. (${status})`);
     }
     const position = await getCurrentPositionAsync();
     return position.coords;

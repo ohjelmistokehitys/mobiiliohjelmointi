@@ -3,19 +3,9 @@ import MyButton from '@/components/MyButton';
 import MyInput from '@/components/MyInput';
 import { Cell, Row } from '@/components/MyTable';
 import Title from '@/components/Title';
-import { openDatabaseSync } from 'expo-sqlite';
+import { useSQLiteContext } from 'expo-sqlite';
 import React, { useEffect, useState } from "react";
 import { Alert, FlatList, Pressable, Text } from "react-native";
-
-const db = openDatabaseSync('coursedb');
-
-const initializeDb = async () => {
-    try {
-        await db.execAsync(`CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY NOT NULL, credits INT, title TEXT);`);
-    } catch (error) {
-        console.error('Could not open database', error);
-    }
-}
 
 type Course = {
     id: number,
@@ -28,14 +18,15 @@ export default function SQLiteExample() {
     const [title, setTitle] = useState('');
     const [courses, setCourses] = useState<Course[]>([]);
 
+    const db = useSQLiteContext();
+
     useEffect(() => {
-        initializeDb();
         updateList();
     }, []);
 
     const saveItem = async () => {
         try {
-            await db.runAsync('INSERT INTO course (title, credits) VALUES (?, ?)', title, credit);
+            await db.runAsync(`INSERT INTO course (title, credits) VALUES (?, ?)`, title, credit);
         } catch (error) {
             console.error('Could not add item', error);
         }
@@ -44,8 +35,8 @@ export default function SQLiteExample() {
 
     const updateList = async () => {
         try {
-            const list = await db.getAllAsync('SELECT * from course');
-            setCourses(list as Course[]);
+            const list = await db.getAllAsync<Course>('SELECT * from course');
+            setCourses(list);
         } catch (error) {
             console.error('Could not get items', error);
         }

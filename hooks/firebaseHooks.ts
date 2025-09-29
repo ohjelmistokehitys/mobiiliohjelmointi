@@ -20,12 +20,11 @@ export function useFirebaseShoppingList() {
 
             if (data) {
                 // add an id in each object, so they can be later used to delete items:
-                const itemsWithId = Object.entries(data).map(([id, item]) => ({ ...item, id }));
+                const itemsWithId = Object.entries(data).map(([id, item]) => ({ id, ...item }));
                 setItems(itemsWithId);
             } else {
                 setItems([]);
             }
-
         });
     }, []);
 

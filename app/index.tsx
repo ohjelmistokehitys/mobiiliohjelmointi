@@ -37,6 +37,10 @@ export default function Index() {
         <Link href="/asyncStorage" style={styles.link}>AsyncStorage</Link>
         <Link href="/sqlite" style={styles.link}>SQLite</Link>
         <Link href="/firebaseShoppingList" style={styles.link}>Firebase Shopping List</Link>
+
+        <Text>Expo SDK</Text>
+        <Link href="/camera" style={styles.link}>Camera</Link>
+        <Link href="/contacts" style={styles.link}>Contacts</Link>
       </Container>
     </ScrollView>
   );
