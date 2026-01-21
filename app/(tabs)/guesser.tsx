@@ -1,27 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { styles } from '@/components/ui/styles';
+import { useEffect, useRef, useState } from 'react';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
 export default function GuessingGameScreen() {
 
     const [correct, setCorrect] = useState(-1);
     const [guess, setGuess] = useState("");
-    const [guesses, setGuesses] = useState(0);
+    const guesses = useRef(0);
     const [message, setMessage] = useState("");
 
-    // randomizes a value between 1 - 100:
+    console.log({
+        correct, guess, guesses, message
+    });
+
     const newGame = () => {
+        // randomizes a value between 1 - 100:
         setCorrect(1 + Math.trunc(Math.random() * 100));
-        setGuesses(0);
+        guesses.current = 0;
         setGuess("");
         setMessage("Guess a number between 0 - 100");
     };
 
     const makeGuess = () => {
-        setGuesses(guesses + 1);
+        guesses.current++;
 
         const g = +guess;
         if (g === correct) {
-            setMessage(`Correct! It took you ${guesses} guesses.`); // TODO: does this work?
+            setMessage(`Correct! It took you ${guesses.current} guesses.`);
         }
         if (g < correct) {
             setMessage(`${g} is too low`);
@@ -42,6 +47,7 @@ export default function GuessingGameScreen() {
             value={String(guess)}
             onChangeText={value => setGuess(value)}
             style={styles.input}
+            inputMode="numeric"
         />
         <View style={styles.buttonGroup}>
             <Pressable style={styles.button} onPress={makeGuess}><Text style={styles.buttonText}>Guess</Text></Pressable>
@@ -51,44 +57,3 @@ export default function GuessingGameScreen() {
         <Text style={styles.paragraph}>{message}</Text>
     </View >;
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "black",
-        flex: 1,
-        justifyContent: "flex-start",
-        marginTop: 50,
-        alignItems: "center",
-        gap: 20
-    },
-    heading: {
-        fontSize: 40,
-        color: "white",
-        textAlign: "center"
-    },
-    paragraph: {
-        fontSize: 20,
-        color: "white"
-    },
-    input: {
-        color: "white",
-        padding: 5,
-        borderColor: "white",
-        borderWidth: 1,
-        minWidth: 200
-    },
-    buttonGroup: {
-        flexDirection: "row",
-        gap: 20
-    },
-    button: {
-        backgroundColor: "white",
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderRadius: 5
-    },
-    buttonText: {
-        fontWeight: "bold",
-        fontSize: 18
-    }
-});
