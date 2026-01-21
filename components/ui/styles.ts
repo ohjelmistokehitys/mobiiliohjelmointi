@@ -5,12 +5,18 @@ export const styles = StyleSheet.create({
         backgroundColor: "black",
         flex: 1,
         justifyContent: "flex-start",
-        marginTop: 50,
+        paddingHorizontal: 20,
+        paddingBottom: 20,
+        paddingTop: 50,
         alignItems: "center",
         gap: 20
     },
     heading: {
         fontSize: 40,
+        color: "white"
+    },
+    strong: {
+        fontWeight: "bold",
         color: "white"
     },
     paragraph: {
