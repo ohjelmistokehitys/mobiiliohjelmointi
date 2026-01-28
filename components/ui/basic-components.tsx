@@ -8,9 +8,13 @@ export function Container(props: ViewProps) {
 }
 
 export function Heading(props: TextProps) {
-    return <Text style={styles.heading}>{props.children}</Text>
+    return <Text style={styles.heading}>{props.children}</Text>;
 }
 
 export function Strong(props: TextProps) {
-    return <Text style={styles.strong}>{props.children}</Text>
+    return <Text style={styles.strong}>{props.children}</Text>;
+}
+
+export function Paragraph(props: TextProps) {
+    return <Text style={styles.paragraph}>{props.children}</Text>;
 }
