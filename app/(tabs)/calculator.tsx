@@ -10,7 +10,7 @@ export default function CalculatorScreen() {
 
     const [numA, setNumA] = useState("0");
     const [numB, setNumB] = useState("0");
-    const [history, setHistory] = useState<Calculation[]>([]);
+    const [history, setHistory] = useState<readonly Calculation[]>([]);
 
     const calculate = (operation: "+" | "-") => {
         const a = +numA;
@@ -20,12 +20,11 @@ export default function CalculatorScreen() {
             Alert.alert(`Please enter numbers only`);
             return;
         }
-
         setHistory([...history, new Calculation(a, b, operation)]);
     }
 
     return <Container>
-        <Heading>Calculator</Heading>
+        <Heading>Calculator 🧮</Heading>
         <TextInput
             value={numA}
             onChangeText={value => setNumA(value)}
@@ -45,7 +44,7 @@ export default function CalculatorScreen() {
 
         <FlatList
             data={history.toReversed()}
-            ListEmptyComponent={<Paragraph>Let's do math!</Paragraph>}
+            ListEmptyComponent={<Paragraph>Let&apos;s do math!</Paragraph>}
             renderItem={({ item }) => <Paragraph>{item.toString()}</Paragraph>}
         />
 
