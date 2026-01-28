@@ -1,5 +1,6 @@
 import { Container, Heading, Strong } from "@/components/ui/basic-components";
 import { news } from "@/uutiset";
+import { Link } from "expo-router";
 import { FlatList, Text, View } from "react-native";
 
 type Article = {
@@ -23,10 +24,15 @@ export default function NewsScreen() {
 
 
 function ListArticle({ article }: { article: Article }) {
-    return <View>
-        <Strong>{article.title}</Strong>
-        {article.lead && <Text style={{ color: "white" }}>{article.lead}</Text>}
-    </View>
+    return <Link href={{
+        pathname: "/articles/[articleId]",
+        params: { articleId: article.id }
+    }}>
+        <View>
+            <Strong>{article.title}</Strong>
+            {article.lead && <Text style={{ color: "white" }}>{article.lead}</Text>}
+        </View>
+    </Link>;
 }
 
 function Separator() {
