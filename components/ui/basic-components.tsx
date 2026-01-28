@@ -1,10 +1,14 @@
-import { Text, TextProps, View, ViewProps } from "react-native";
+import { Keyboard, Text, TextProps, TouchableWithoutFeedback, View, ViewProps } from "react-native";
 import { styles } from "./styles";
 
 export function Container(props: ViewProps) {
-    return <View style={styles.container}>
-        {props.children}
-    </View>;
+    return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+                {props.children}
+            </View>
+        </TouchableWithoutFeedback >
+    );
 }
 
 export function Heading(props: TextProps) {

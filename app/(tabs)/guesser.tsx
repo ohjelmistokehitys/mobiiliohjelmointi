@@ -1,3 +1,4 @@
+import { Container, Heading, Paragraph } from '@/components/ui/basic-components';
 import { styles } from '@/components/ui/styles';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
@@ -41,8 +42,8 @@ export default function GuessingGameScreen() {
 
     useEffect(newGame, []);
 
-    return <View style={styles.container}>
-        <Text style={styles.heading}>Guess a number</Text>
+    return <Container>
+        <Heading>Guess a number</Heading>
         <TextInput
             value={String(guess)}
             onChangeText={value => setGuess(value)}
@@ -54,6 +55,6 @@ export default function GuessingGameScreen() {
             <Pressable style={styles.button} onPress={newGame}><Text style={styles.buttonText}>New game</Text></Pressable>
         </View >
 
-        <Text style={styles.paragraph}>{message}</Text>
-    </View >;
+        <Paragraph>{message}</Paragraph>
+    </Container>;
 }
