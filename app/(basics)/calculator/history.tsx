@@ -1,12 +1,11 @@
 import { Container, Heading, Strong } from "@/components/ui/basic-components";
-import { useContext } from "react";
-import { FlatList } from "react-native";
-import { HistoryContext } from "./_layout";
+import { useCalculationHistory } from "@/contexts/calculation-context";
+import { Button, FlatList } from "react-native";
 
 
 export default function CalculationHistory() {
 
-    const { history } = useContext(HistoryContext);
+    const { history, setHistory } = useCalculationHistory();
 
     return <Container>
         <Heading>Calculation history</Heading>
@@ -14,6 +13,9 @@ export default function CalculationHistory() {
         <FlatList
             data={history}
             renderItem={({ item }) => <Strong>{item.toString()}</Strong>}
+            ListEmptyComponent={<Strong>No history yet...</Strong>}
         />
+
+        <Button title="Clear history" onPress={() => setHistory([])} />
     </Container>
 }

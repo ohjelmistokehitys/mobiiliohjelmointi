@@ -1,18 +1,19 @@
 
 import { Container, Heading, Paragraph, Strong } from '@/components/ui/basic-components';
 import { styles } from '@/components/ui/styles';
+import { useCalculationHistory } from '@/contexts/calculation-context';
 import { Calculation } from '@/types/calculator';
 import { Link } from 'expo-router';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Alert, Pressable, Text, TextInput, View } from 'react-native';
-import { HistoryContext } from './_layout';
+
 
 export default function CalculatorScreen() {
 
     const [numA, setNumA] = useState("0");
     const [numB, setNumB] = useState("0");
 
-    const { history, setHistory } = useContext(HistoryContext);
+    const { history, setHistory } = useCalculationHistory();
 
     const calculate = (operation: "+" | "-") => {
         const a = +numA;
@@ -46,9 +47,9 @@ export default function CalculatorScreen() {
 
         <Strong>{history.at(-1)?.toString() ?? "Let's do math!"}</Strong>
 
-        {
-            history.length > 0 &&
-            <Link href={{ pathname: "/calculator/history", params: { history: JSON.stringify(history) } }}><Paragraph>See history</Paragraph></Link>
-        }
+        {/* FIXME: "should contain identifiers and state, not actual data objects" */}
+        <Link href="/calculator/history"><Paragraph>See history ({history.length})</Paragraph></Link>
+
+        <Link href="/"><Paragraph>Back to start</Paragraph></Link>
     </Container>;
 }

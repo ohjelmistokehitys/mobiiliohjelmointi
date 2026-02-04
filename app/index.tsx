@@ -5,6 +5,8 @@ export default function HomeScreen() {
     return <Container>
         <Heading>Home</Heading>
 
+        <Link href="/githubSearch"><Strong>GitHub search</Strong></Link>
+
         <Link href="/shoppingList"><Strong>Shopping list</Strong></Link>
 
         <Link href="/guesser"><Strong>Guesser</Strong></Link>
