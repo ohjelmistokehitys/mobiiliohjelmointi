@@ -1,9 +1,9 @@
-import { Keyboard, Text, TextProps, TouchableWithoutFeedback, View, ViewProps } from "react-native";
+import { Text, TextProps, TouchableWithoutFeedback, View, ViewProps } from "react-native";
 import { styles } from "./styles";
 
 export function Container(props: ViewProps) {
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <TouchableWithoutFeedback>
             <View style={styles.container}>
                 {props.children}
             </View>

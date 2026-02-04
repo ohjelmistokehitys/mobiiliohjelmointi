@@ -7,6 +7,8 @@ export default function HomeScreen() {
 
         <Link href="/shoppingList"><Strong>Shopping list</Strong></Link>
 
+        <Link href="/guesser"><Strong>Guesser</Strong></Link>
+
         <Link href="/calculator"><Strong>Calculator</Strong></Link>
 
         <Link href="/articles"><Strong>Articles</Strong></Link>
