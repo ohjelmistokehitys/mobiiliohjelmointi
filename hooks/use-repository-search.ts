@@ -12,24 +12,30 @@ export type Repository = {
  * The benefit of this hook is to abstract the fetching logic and state management
  * from the UI component, making it also reusable in other parts of the app if needed.
  */
-export function useRepositories(input: string) {
+export function useRepositorySearch(input: string) {
     const [repositories, setRepositories] = useState<Repository[]>([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true); // update loading state (triggers re-render immediately)
 
-        fetchRepositories(input).then(result => {
-            // update repositories and loading state (triggers re-render when data is fetched)
-            setRepositories(result);
-            setLoading(false);
-        });
+        fetchRepositories(input)
+            .then(result => {
+                // update repositories and loading state (triggers re-render when data is fetched)
+                setRepositories(result);
+            })
+            .catch(error => {
+                console.error("Failed to fetch repositories:", error);
+                setRepositories([]);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
 
     }, [input]); // re-run effect when input changes
 
     return {
-        // if loading, return empty array to avoid showing old results
-        repositories: loading ? [] : repositories,
+        repositories: loading ? [] : repositories, // when loading, return empty array to avoid showing old results
         loading
     };
 }
