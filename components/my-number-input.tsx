@@ -13,7 +13,7 @@ export default function MyNumberInput({ value, onChange }: Props) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        const num = +text;
+        const num = +(text.replace(",", "."));
         onChange(num);
         setError(isNaN(num));
     }, [text]);
@@ -27,7 +27,10 @@ export default function MyNumberInput({ value, onChange }: Props) {
     return <TextInput
         value={text}
         inputMode="numeric"
-        onChangeText={t => { setText(t); }}
-        style={[styles.input, error ? styles.errorInput : {}]} />;
+        onChangeText={setText}
+        style={[
+            styles.input,
+            error ? styles.errorInput : {}
+        ]} />;
 }
 

@@ -8,11 +8,10 @@ import { useEffect, useState } from "react";
 
 
 export default function GuesserScreen() {
-
     const [correct, setCorrect] = useState(0);
     const [guess, setGuess] = useState(0);
     const [guesses, setGuesses] = useState<number[]>([]);
-    const [message, setMessage] = useState("Guess a number between 1 and 100");
+    const [message, setMessage] = useState("");
 
     useEffect(() => restart(), []);
 
@@ -24,8 +23,7 @@ export default function GuesserScreen() {
 
         setGuesses([...guesses, guess]);
         if (guess === correct) {
-            // fixme: the number of guesses is off by one
-            setMessage(`You guessed it! The number was ${correct} and it took you ${guesses.length} guesses!`);
+            setMessage(`You guessed it! The number was ${correct} and it took you ${guesses.length + 1} guesses!`);
         }
         if (guess < correct) {
             setMessage(`Your guess of ${guess} is too low.`);
@@ -40,10 +38,9 @@ export default function GuesserScreen() {
         setGuess(0);
         setGuesses([]);
         setMessage("Guess a number between 1 and 100");
-
-        // fixme: why does this keep logging the wrong number?
-        console.log("New correct number is", correct);
     }
+
+    useEffect(() => console.log("New correct number is", correct), [correct]);
 
     return (
         <MyContainer>
