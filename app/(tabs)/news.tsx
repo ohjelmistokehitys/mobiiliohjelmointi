@@ -11,7 +11,7 @@ export default function NewsScreen() {
             data={news}
             renderItem={({ item }) => <Article article={item} />}
             ItemSeparatorComponent={Separator}
-            style={{ width: "100%" }}
+            style={{ alignSelf: "stretch" }}
         />
     </MyContainer>;
 }
