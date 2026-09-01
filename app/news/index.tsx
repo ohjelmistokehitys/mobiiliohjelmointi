@@ -1,6 +1,7 @@
 import MyContainer from "@/components/my-container";
 import MyTitle from "@/components/my-title";
 import { news } from "@/news";
+import { Link } from "expo-router";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 
 export default function NewsScreen() {
@@ -20,11 +21,13 @@ type ArticleProps = {
     article: typeof news[number]
 };
 
+// TODO: Make the whole article element act as a link
 function Article({ article }: ArticleProps) {
     return <View style={styles.articleContainer}>
         <View style={{ flexShrink: 1 }}>
             <Text>
-                {article.title}
+
+                <Link href={`/news/${article.id}`}>{article.title}</Link>
             </Text>
         </View>
         <ArticleThumbnail article={article} />

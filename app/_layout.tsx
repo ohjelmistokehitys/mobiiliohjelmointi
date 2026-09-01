@@ -14,11 +14,26 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+      <Stack screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+        <Stack.Screen name="index" options={{
+          title: "Welcome"
+        }} />
+        <Stack.Screen name="news/index" options={{
+          title: "Latest news"
+        }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
   );
 }
+
+//        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+//        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
