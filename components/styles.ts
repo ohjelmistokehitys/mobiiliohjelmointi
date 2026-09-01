@@ -17,13 +17,11 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         paddingTop: 40,
-        backgroundColor: "darkgray",
+        backgroundColor: "#f0f0f0",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        gap: 10,
-        borderColor: "red",
-        borderWidth: 5
+        gap: 10
     },
     input: {
         borderWidth: 1,
