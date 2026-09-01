@@ -21,9 +21,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        gap: 10,
-        borderColor: "red",
-        borderWidth: 5
+        gap: 10
     },
     input: {
         borderWidth: 1,

@@ -34,9 +34,9 @@ export default function CalculatorScreen() {
         <MyContainer>
             <MyTitle>Calculator</MyTitle>
 
-            <MyNumberInput value={a} onChange={setA} />
+            <MyNumberInput value={a} onChange={setA} onSubmit={() => calculate("+")} />
 
-            <MyNumberInput value={b} onChange={setB} />
+            <MyNumberInput value={b} onChange={setB} onSubmit={() => calculate("+")} />
 
             <MyRow>
                 <MyButton title="+" onPress={() => calculate("+")} />
@@ -55,7 +55,7 @@ function CalculatorHistory({ history }: { history: Calculation[] }) {
     return <View style={{ flexShrink: 1, alignSelf: "stretch" }}>
         <MyTitle>History</MyTitle>
         <FlatList
-            data={history.reverse()}
+            data={history.toReversed()}
             renderItem={({ item }) => <MyText>{item.a} {item.op} {item.b} = {item.result}</MyText>}
             ListEmptyComponent={() => <MyText>No calculations yet.</MyText>}
             keyExtractor={(_, index) => index.toString()}

@@ -4,10 +4,11 @@ import styles from "./styles";
 
 type Props = {
     value: number,
-    onChange: (value: number) => void
+    onChange: (value: number) => void,
+    onSubmit?: () => void
 };
 
-export default function MyNumberInput({ value, onChange }: Props) {
+export default function MyNumberInput({ value, onChange, onSubmit }: Props) {
 
     const [text, setText] = useState(value.toString());
     const [error, setError] = useState(false);
@@ -16,7 +17,7 @@ export default function MyNumberInput({ value, onChange }: Props) {
         const num = +(text.replace(",", "."));
         onChange(num);
         setError(isNaN(num));
-    }, [text]);
+    }, [text, onChange]);
 
     useEffect(() => {
         if (value === 0) {
@@ -28,6 +29,7 @@ export default function MyNumberInput({ value, onChange }: Props) {
         value={text}
         inputMode="numeric"
         onChangeText={setText}
+        onSubmitEditing={() => onSubmit && onSubmit()}
         style={[
             styles.input,
             error ? styles.errorInput : {}

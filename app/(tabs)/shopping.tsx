@@ -7,18 +7,37 @@ import MyTitle from "@/components/my-title";
 import { useState } from "react";
 import { FlatList, Pressable, StyleSheet } from "react-native";
 
+type ShoppingItem = {
+    name: string,
+    checked: boolean,
+    key: number
+}
 
 export default function ShoppingScreen() {
 
-    const [items, setItems] = useState<string[]>(["milk", "bread", "eggs"]);
+    const [items, setItems] = useState<ShoppingItem[]>([
+        { name: "milk", checked: false, key: 0 },
+        { name: "bread", checked: false, key: 1 },
+        { name: "eggs", checked: false, key: 2 }
+    ]);
+
     const [text, setText] = useState("");
+
+    const setChecked = (check: ShoppingItem) => {
+        setItems(items.map(current => current === check ? { ...current, checked: !current.checked } : current));
+    }
 
     const addItem = () => {
         if (text.trim() === "") {
             return;
         }
 
-        setItems([...items, text]);
+        setItems([...items, {
+            name: text,
+            checked: false,
+            key: Math.random()
+        }]);
+
         setText("");
     };
 
@@ -34,21 +53,21 @@ export default function ShoppingScreen() {
 
         <FlatList
             style={{ alignSelf: "stretch" }}
-            data={items.reverse()}
-            renderItem={({ item }) => <ShoppingItem item={item} />}
-            ListEmptyComponent={() => <MyTitle>No items yet.</MyTitle>} />
+            data={items.toReversed()}
+            keyExtractor={(item) => item.key.toString()}
+            renderItem={({ item }) => <ShoppingComponent item={item} toggleCheck={() => setChecked(item)} />}
+            ListEmptyComponent={() => <MyText>No items yet.</MyText>}
+        />
     </MyContainer>;
 }
 
-function ShoppingItem({ item }: { item: string }) {
-    const [checked, setChecked] = useState(false);
-
-    return <Pressable onPress={() => setChecked(!checked)} style={styles.itemContainer}>
+function ShoppingComponent({ item, toggleCheck }: { item: ShoppingItem, toggleCheck: () => void }) {
+    return <Pressable onPress={toggleCheck} style={styles.itemContainer}>
         <MyText>
-            {item}
+            {item.name}
         </MyText>
         <MyText>
-            {checked ? "✅" : "⬜"}
+            {item.checked ? "✅" : "⬜"}
         </MyText>
     </Pressable>;
 }
