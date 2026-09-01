@@ -16,11 +16,14 @@ export default StyleSheet.create({
     },
     container: {
         padding: 10,
+        paddingTop: 40,
         backgroundColor: "darkgray",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        gap: 10
+        gap: 10,
+        borderColor: "red",
+        borderWidth: 5
     },
     input: {
         borderWidth: 1,
