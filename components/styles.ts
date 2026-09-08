@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     button: {
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
         borderWidth: 1,
         backgroundColor: "white",
         borderColor: "black",
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         paddingTop: 40,
-        backgroundColor: "darkgray",
+        backgroundColor: "#f0f0f0",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
@@ -45,5 +45,8 @@ export default StyleSheet.create({
     title: {
         fontSize: 25,
         textAlign: "center"
+    },
+    flatList: {
+        alignSelf: "stretch"
     }
 });

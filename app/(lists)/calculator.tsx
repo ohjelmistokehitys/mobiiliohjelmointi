@@ -4,8 +4,9 @@ import MyNumberInput from "@/components/my-number-input";
 import MyRow from "@/components/my-row";
 import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
+import { useCalculationHistory } from "@/hooks/history-context";
+import { Link } from "expo-router";
 import { useState } from "react";
-import { FlatList, View } from "react-native";
 
 
 export default function CalculatorScreen() {
@@ -13,7 +14,8 @@ export default function CalculatorScreen() {
     const [a, setA] = useState(10);
     const [b, setB] = useState(20);
     const [message, setMessage] = useState("");
-    const [history, setHistory] = useState<Calculation[]>([]);
+
+    const { history, setHistory } = useCalculationHistory();
 
     function calculate(op: "+" | "-") {
         if (Number.isNaN(a) || Number.isNaN(b)) {
@@ -41,29 +43,17 @@ export default function CalculatorScreen() {
             <MyRow>
                 <MyButton title="+" onPress={() => calculate("+")} />
                 <MyButton title="-" onPress={() => calculate("-")} />
-                <MyButton title="Clear history" onPress={() => setHistory([])} />
             </MyRow>
 
             <MyTitle>{message}</MyTitle>
 
-            <CalculatorHistory history={history} />
+            <Link href="/calculatorHistory"><MyText>See history</MyText></Link>
+
         </MyContainer>
     );
 }
 
-function CalculatorHistory({ history }: { history: Calculation[] }) {
-    return <View style={{ flexShrink: 1, alignSelf: "stretch" }}>
-        <MyTitle>History</MyTitle>
-        <FlatList
-            data={history.toReversed()}
-            renderItem={({ item }) => <MyText>{item.a} {item.op} {item.b} = {item.result}</MyText>}
-            ListEmptyComponent={() => <MyText>No calculations yet.</MyText>}
-            keyExtractor={(_, index) => index.toString()}
-        />
-    </View>;
-}
-
-type Calculation = {
+export type Calculation = {
     a: number;
     b: number;
     op: "+" | "-";
