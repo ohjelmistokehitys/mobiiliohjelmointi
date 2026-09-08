@@ -1,14 +1,20 @@
 import MyContainer from "@/components/my-container";
+import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
+import { CalculatorContext } from "@/contexts/CalculatorProvider";
 import { Link } from "expo-router";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useContext } from "react";
 import { StyleSheet, Text } from "react-native";
+import { WeatherContext } from "./_layout";
 
 
 export default function HomeScreen() {
+    const { history: calculations } = useContext(CalculatorContext);
+    const { icon, temp } = useContext(WeatherContext);
 
     return <MyContainer>
         <MyTitle>Welcome!</MyTitle>
+        <MyText>{icon} {temp} &deg;C</MyText>
 
         <Link href="/courseSearch" style={styles.button}>
             <MyLink>Course search</MyLink>
@@ -23,7 +29,7 @@ export default function HomeScreen() {
         </Link>
 
         <Link href="/calculator" style={styles.button}>
-            <MyLink>Calculator</MyLink>
+            <MyLink>Calculator ({calculations.length})</MyLink>
         </Link>
 
         <Link href="/shopping" style={styles.button}>

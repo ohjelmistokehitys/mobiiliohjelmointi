@@ -5,7 +5,8 @@ import MyRow from "@/components/my-row";
 import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CalculatorContext } from "../../contexts/CalculatorProvider";
 
 
 export default function CalculatorScreen() {
@@ -14,8 +15,7 @@ export default function CalculatorScreen() {
     const [b, setB] = useState(20);
     const [message, setMessage] = useState("");
 
-    // TODO: this state should be shared
-    const [history, setHistory] = useState<Calculation[]>([]);
+    const { history, setHistory } = useContext(CalculatorContext);
 
     function calculate(op: "+" | "-") {
         if (Number.isNaN(a) || Number.isNaN(b)) {

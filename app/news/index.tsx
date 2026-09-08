@@ -1,12 +1,19 @@
 import MyContainer from "@/components/my-container";
+import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
 import { news } from "@/news";
 import { Link } from "expo-router";
+import { useContext } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { WeatherContext } from "../_layout";
 
 export default function NewsScreen() {
+    const { icon, temp } = useContext(WeatherContext);
+
     return <MyContainer>
         <MyTitle>News ({news.length})</MyTitle>
+        <MyText>{icon} {temp} &deg;C</MyText>
+
 
         <FlatList
             data={news}
