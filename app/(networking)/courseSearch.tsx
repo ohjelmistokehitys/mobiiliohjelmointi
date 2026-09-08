@@ -5,62 +5,73 @@ import MyTextInput from "@/components/my-text-input";
 import MyTitle from "@/components/my-title";
 import styles from "@/components/styles";
 import { useState } from "react";
-import { ActivityIndicator, Alert, FlatList } from "react-native";
+import { ActivityIndicator, Alert, FlatList, StyleSheet, View } from "react-native";
 
-const ENDPOINT_URL = "https://lukkarit.haaga-helia.fi/rest/realizations";
+type Course = {
+    name: string,
+    code: string
+};
 
-export default function CourseSearch() {
-
+export default function CourseSearchScreen() {
     const [keyword, setKeyword] = useState("");
     const [courses, setCourses] = useState<Course[]>([]);
     const [loading, setLoading] = useState(false);
 
-    const handleFetch = async () => {
+    const search = async () => {
+        setCourses([]);
+
         if (!keyword) {
             return;
         }
 
-        setCourses([]);
-        setLoading(true);
 
         try {
-            const params = { "target": "realization", "type": "name", "text": keyword };
-            const response = await fetch(ENDPOINT_URL, {
+            console.log(`searching... ${keyword}`);
+            const params = { "target": "realization", "type": "name", "text": keyword, "dateFrom": "", "dateTo": "", "filters": [], "show": true };
+            setLoading(true);
+
+            const response = await fetch("https://lukkarit.haaga-helia.fi/rest/realizations", {
                 method: "POST",
                 body: JSON.stringify(params)
             });
 
             if (!response.ok) {
-                Alert.alert(`HTTP error ${response.status}, ${response.statusText}`);
+                Alert.alert(`HTTP error: ${response.statusText}`);
+                return;
             }
-
-            const data = (await response.json()).data as Course[];
-            setCourses(data);
-        }
-        finally {
+            const json = await response.json();
+            setCourses(json.data);
+        } catch (e) {
+        } finally {
             setLoading(false);
         }
     }
 
     return <MyContainer>
-        <MyTitle>Course search</MyTitle>
-        <MyTextInput placeholder="Enter keyword..." value={keyword} onChange={setKeyword} />
-        <MyButton title="🔍 Search" onPress={handleFetch} />
+        <MyTitle>Course search ({courses.length})</MyTitle>
+        <MyTextInput placeholder="Enter course name..." value={keyword} onChange={setKeyword} />
+        <MyButton title="🔍 Search" onPress={search} />
 
-        {loading && <ActivityIndicator size={60} />}
+        {loading && <ActivityIndicator size={40} />}
         <FlatList
-            data={courses}
             style={styles.flatList}
-            keyExtractor={c => c.code}
-            renderItem={({ item }) => <MyText>{item.name}</MyText>}
+            data={courses}
+            renderItem={({ item }) => <CourseRow course={item} />}
         />
-    </MyContainer>;
+    </MyContainer>
 }
 
 
-type Course = {
-    name: string,
-    code: string,
-    teaching_language: string,
-    scope_amount: number
+function CourseRow({ course }: { course: Course }) {
+    return <View style={courseStyles.courseRow}>
+        <MyText italic>{course.code}</MyText>
+        <MyText bold>{course.name}</MyText>
+    </View>;
 }
+
+const courseStyles = StyleSheet.create({
+    courseRow: {
+        marginBottom: 20,
+        alignItems: "flex-start"
+    }
+});

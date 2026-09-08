@@ -20,7 +20,7 @@ export default function CalculatorHistory() {
             <FlatList
                 data={history.toReversed()}
                 renderItem={({ item }) => <MyText>{item.a} {item.op} {item.b} = {item.result}</MyText>}
-                ListEmptyComponent={() => <MyText>No calculations yet.</MyText>}
+                ListEmptyComponent={() => <MyText italic>No calculations yet.</MyText>}
                 keyExtractor={(_, index) => index.toString()}
             />
 
