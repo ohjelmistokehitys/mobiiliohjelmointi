@@ -4,7 +4,6 @@ import MyNumberInput from "@/components/my-number-input";
 import MyRow from "@/components/my-row";
 import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
-import { useCalculationHistory } from "@/hooks/history-context";
 import { Link } from "expo-router";
 import { useState } from "react";
 
@@ -15,7 +14,8 @@ export default function CalculatorScreen() {
     const [b, setB] = useState(20);
     const [message, setMessage] = useState("");
 
-    const { history, setHistory } = useCalculationHistory();
+    // TODO: this state should be shared
+    const [history, setHistory] = useState<Calculation[]>([]);
 
     function calculate(op: "+" | "-") {
         if (Number.isNaN(a) || Number.isNaN(b)) {
@@ -47,7 +47,7 @@ export default function CalculatorScreen() {
 
             <MyTitle>{message}</MyTitle>
 
-            <Link href="/calculatorHistory"><MyText>See history</MyText></Link>
+            <Link href="/calculatorHistory"><MyText>See history ({history.length})</MyText></Link>
 
         </MyContainer>
     );

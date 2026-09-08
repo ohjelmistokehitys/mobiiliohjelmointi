@@ -3,13 +3,16 @@ import MyContainer from "@/components/my-container";
 import MyRow from "@/components/my-row";
 import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
-import { useCalculationHistory } from "@/hooks/history-context";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { FlatList } from "react-native";
+import { Calculation } from "./calculator";
 
 export default function CalculatorHistory() {
 
-    const { history, setHistory } = useCalculationHistory();
+    // TODO: this state should be shared
+    const [history, setHistory] = useState<Calculation[]>([]);
+
     const router = useRouter();
 
     return (
