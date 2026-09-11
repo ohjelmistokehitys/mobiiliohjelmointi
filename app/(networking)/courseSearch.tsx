@@ -42,6 +42,7 @@ export default function CourseSearchScreen() {
             const json = await response.json();
             setCourses(json.data);
         } catch (e) {
+            console.error(e);
         } finally {
             setLoading(false);
         }
