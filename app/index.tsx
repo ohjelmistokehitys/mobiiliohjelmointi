@@ -16,6 +16,10 @@ export default function HomeScreen() {
         <MyTitle>Welcome!</MyTitle>
         <MyText>{icon} {temp} &deg;C</MyText>
 
+        <Link href="/map" style={styles.button}>
+            <MyLink>Map</MyLink>
+        </Link>
+
         <Link href="/courseSearch" style={styles.button}>
             <MyLink>Course search</MyLink>
         </Link>
