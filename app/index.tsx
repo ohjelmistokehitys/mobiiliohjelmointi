@@ -2,19 +2,25 @@ import MyContainer from "@/components/my-container";
 import MyText from "@/components/my-text";
 import MyTitle from "@/components/my-title";
 import { CalculatorContext } from "@/contexts/CalculatorProvider";
+import { useWeather } from "@/contexts/weather-context";
 import { Link } from "expo-router";
 import { PropsWithChildren, useContext } from "react";
 import { StyleSheet, Text } from "react-native";
-import { WeatherContext } from "./_layout";
 
 
 export default function HomeScreen() {
     const { history: calculations } = useContext(CalculatorContext);
-    const { icon, temp } = useContext(WeatherContext);
+    const { icon, temp } = useWeather();
 
     return <MyContainer>
+
         <MyTitle>Welcome!</MyTitle>
         <MyText>{icon} {temp} &deg;C</MyText>
+
+
+        <Link href="/firebase" style={styles.button}>
+            <MyLink>Firebase demo</MyLink>
+        </Link>
 
         <Link href="/courseSearch" style={styles.button}>
             <MyLink>Course search</MyLink>
@@ -39,7 +45,6 @@ export default function HomeScreen() {
         <Link href="/news" style={styles.button}>
             <MyLink>News</MyLink>
         </Link>
-
     </MyContainer>;
 }
 
