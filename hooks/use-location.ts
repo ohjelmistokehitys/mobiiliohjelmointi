@@ -3,23 +3,28 @@ import { useEffect, useState } from "react";
 
 export function useLocation() {
     const [location, setLocation] = useState<LocationObject | null>(null);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const getLocation = async () => {
-            const { granted } = await requestForegroundPermissionsAsync();
+    const updateLocation = async () => {
+        const { granted } = await requestForegroundPermissionsAsync();
+        setLoading(true);
 
-            if (granted) {
-                const pos = await getCurrentPositionAsync();
-                setLocation(pos);
-                console.log(pos);
+        if (granted) {
+            const pos = await getCurrentPositionAsync();
+            setLocation(pos);
+            console.log(pos);
 
-            } else {
-                console.error("Positioning permission not granted");
-            }
+        } else {
+            console.error("Positioning permission not granted");
         }
 
-        getLocation();
+        setLoading(false);
+    }
+
+    // on first render, request the location permission and get the current position
+    useEffect(() => {
+        updateLocation();
     }, []);
 
-    return location;
+    return { location, updateLocation, loading };
 }

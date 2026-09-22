@@ -58,9 +58,6 @@ export default function FirebaseScreen() {
         <MyText>
             Firebase is a platform developed by Google that provides a variety of tools and services for building and managing mobile and web applications.
         </MyText>
-        <MyText>
-            Firebase provides Realtime Database that is NoSQL cloud database. Data is stored as JSON and synchronized in realtime to every connected client.
-        </MyText>
 
         <MyTextInput
             placeholder="Product title"

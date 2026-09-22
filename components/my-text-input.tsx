@@ -5,16 +5,19 @@ type Props = {
     value: string,
     placeholder?: string,
     onChange: (value: string) => void,
-    password?: boolean
+    password?: boolean,
+    multiline?: boolean
 };
 
-export default function MyTextInput({ value, placeholder, onChange, password }: Props) {
+export default function MyTextInput({ value, placeholder, onChange, password, multiline }: Props) {
 
     return <TextInput
         value={value}
         placeholder={placeholder}
         onChangeText={onChange}
         secureTextEntry={password}
-        style={styles.input} />;
+        multiline={multiline}
+        textAlignVertical={multiline ? "top" : "center"}
+        style={[styles.input, multiline && styles.multiline]} />;
 }
 

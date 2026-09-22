@@ -17,9 +17,20 @@ export default function HomeScreen() {
         <MyTitle>Welcome!</MyTitle>
         <MyText>{icon} {temp} &deg;C</MyText>
 
+        <Link href="/asyncStorage" style={styles.button}>
+            <MyLink>Async Storage</MyLink>
+        </Link>
+
+        <Link href="/sqlite" style={styles.button}>
+            <MyLink>SQLite</MyLink>
+        </Link>
 
         <Link href="/firebase" style={styles.button}>
             <MyLink>Firebase demo</MyLink>
+        </Link>
+
+        <Link href="/location" style={styles.button}>
+            <MyLink>GPS location</MyLink>
         </Link>
 
         <Link href="/courseSearch" style={styles.button}>
@@ -28,10 +39,6 @@ export default function HomeScreen() {
 
         <Link href="/guesser" style={styles.button}>
             <MyLink>Guesser</MyLink>
-        </Link>
-
-        <Link href="/home" style={styles.button}>
-            <MyLink>Home (expo template)</MyLink>
         </Link>
 
         <Link href="/calculator" style={styles.button}>

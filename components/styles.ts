@@ -16,10 +16,9 @@ export default StyleSheet.create({
     },
     container: {
         padding: 10,
-        paddingTop: 40,
         backgroundColor: "#f0f0f0",
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         gap: 10
     },
@@ -30,6 +29,9 @@ export default StyleSheet.create({
         padding: 10,
         fontSize: 15,
         width: "100%"
+    },
+    multiline: {
+        height: 100,
     },
     errorInput: {
         borderColor: "red",

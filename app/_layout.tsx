@@ -11,7 +11,7 @@ export default function RootLayout() {
 
     const colorScheme = useColorScheme();
 
-    const location = useLocation();
+    const { location } = useLocation();
     const weather = useMeteoApi(location);
 
     return (
