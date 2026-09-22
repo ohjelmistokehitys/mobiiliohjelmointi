@@ -5,10 +5,11 @@ import styles from "./styles";
 type Props = {
     value: number,
     onChange: (value: number) => void,
+    placeholder?: string,
     onSubmit?: () => void
 };
 
-export default function MyNumberInput({ value, onChange, onSubmit }: Props) {
+export default function MyNumberInput({ value, onChange, onSubmit, placeholder }: Props) {
 
     const [text, setText] = useState(value.toString());
     const [error, setError] = useState(false);
@@ -29,6 +30,7 @@ export default function MyNumberInput({ value, onChange, onSubmit }: Props) {
         value={text}
         inputMode="numeric"
         onChangeText={setText}
+        placeholder={placeholder}
         onSubmitEditing={() => onSubmit && onSubmit()}
         style={[
             styles.input,

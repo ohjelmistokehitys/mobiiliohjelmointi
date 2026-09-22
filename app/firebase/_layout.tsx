@@ -9,7 +9,7 @@ export default function FirebaseLayout() {
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
-        onAuthStateChanged(auth, () => {
+        return onAuthStateChanged(auth, () => {
             setAuthenticated(!!auth.currentUser);
             console.log("Signed in as", auth.currentUser);
         });
