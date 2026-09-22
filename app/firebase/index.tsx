@@ -4,10 +4,9 @@ import MyNumberInput from "@/components/my-number-input";
 import MyText from "@/components/my-text";
 import MyTextInput from "@/components/my-text-input";
 import MyTitle from "@/components/my-title";
-import { auth, database } from "@/firebase";
+import { auth } from "@/firebase";
 import { getAuth, signOut } from "firebase/auth";
-import { onValue, push, ref } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FlatList } from "react-native";
 
 type Product = { title: string, amount: number };
@@ -29,26 +28,10 @@ export default function FirebaseScreen() {
 
     const handleSave = async () => {
         const product = { title, amount };
-        await push(ref(database, `items/${currentUser.uid}`), product);
 
-        setTitle("");
-        setAmount(1);
+        // FIXME: This just saves the product locally, save it in Firebase instead
+        setItems([...items, product]);
     }
-
-    useEffect(() => {
-        const unsubscribe = onValue(ref(database, `items/${currentUser.uid}`), (snapshot) => {
-            console.log(snapshot.val());
-            if (!snapshot.exists()) {
-                setItems([]);
-                return;
-            }
-            const productList: Product[] = Object.values(snapshot.val());
-            setItems(productList);
-        });
-
-        // return function to unsubscribe from the listener when the component unmounts
-        return unsubscribe;
-    }, []);
 
     return <MyContainer>
         <MyTitle>Hello {currentUser.email}!</MyTitle>
