@@ -4,15 +4,17 @@ import MyNumberInput from "@/components/my-number-input";
 import MyText from "@/components/my-text";
 import MyTextInput from "@/components/my-text-input";
 import MyTitle from "@/components/my-title";
-import { auth } from "@/firebase";
+import { database } from "@/firebase";
 import { getAuth, signOut } from "firebase/auth";
-import { useState } from "react";
+import { onValue, push, ref } from "firebase/database";
+import { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 type Product = { title: string, amount: number };
 
 export default function FirebaseScreen() {
-    const { currentUser } = getAuth();
+    const auth = getAuth();
+    const { currentUser } = auth;
 
     // local copy of the items in the database, to be displayed in the FlatList
     const [items, setItems] = useState<Product[]>([]);
@@ -21,16 +23,24 @@ export default function FirebaseScreen() {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState(1);
 
-
     if (!currentUser) {
         throw new Error("User is not logged in. This screen should only be accessible to authenticated users.");
     }
 
+    useEffect(() => {
+        return onValue(ref(database, `items/${currentUser.uid}`), (snapshot) => {
+            if (snapshot.exists()) {
+                console.log("snapshot", snapshot.val());
+                console.log("values", Object.values(snapshot.val()));
+                setItems(Object.values(snapshot.val()));
+            }
+        });
+    }, []);
+
     const handleSave = async () => {
         const product = { title, amount };
 
-        // FIXME: This just saves the product locally, save it in Firebase instead
-        setItems([...items, product]);
+        push(ref(database, `items/${currentUser.uid}`), product);
     }
 
     return <MyContainer>

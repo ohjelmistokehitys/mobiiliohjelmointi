@@ -3,32 +3,16 @@ import MyNumberInput from '@/components/my-number-input';
 import MyText from '@/components/my-text';
 import MyTextInput from '@/components/my-text-input';
 import MyTitle from '@/components/my-title';
-import * as SQLite from 'expo-sqlite';
+import { useCourses } from '@/hooks/use-courses';
 import { useState } from "react";
 import { Button, FlatList, Text, View } from "react-native";
 
-type Course = {
-    id: number,
-    title: string,
-    credits: string
-}
-
-// TODO: not the best idea to use a global variable and synchronous database access
-const db = SQLite.openDatabaseSync("course.sqlite");
-
-export default function CourseList() {
+export default function SqliteScreen() {
     // state variables for the input fields
     const [title, setTitle] = useState("");
-    const [credit, setCredit] = useState(5);
+    const [credits, setCredits] = useState(5);
 
-    // a local copy of the items in the database, to be displayed in the FlatList
-    const [courses, setCourses] = useState<Course[]>([]);
-
-    const saveCourse = async () => {
-    };
-
-    const deleteCourse = async (id: number) => {
-    };
+    const { courses, saveCourse, deleteCourse } = useCourses();
 
     return (
         <MyContainer>
@@ -45,10 +29,10 @@ export default function CourseList() {
 
             <MyNumberInput
                 placeholder='Credits'
-                onChange={setCredit}
-                value={credit} />
+                onChange={setCredits}
+                value={credits} />
 
-            <Button onPress={saveCourse} title="Save" />
+            <Button onPress={() => saveCourse(credits, title)} title="Save" />
 
             <FlatList
                 renderItem={({ item }) =>
@@ -58,6 +42,7 @@ export default function CourseList() {
                     </View>
                 }
                 data={courses}
+                keyExtractor={course => course.id.toString()}
             />
         </MyContainer>
     );

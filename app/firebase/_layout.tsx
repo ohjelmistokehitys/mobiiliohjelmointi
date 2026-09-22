@@ -1,11 +1,11 @@
 import '@/firebase';
-import { auth } from '@/firebase';
 import { Stack } from 'expo-router';
-import { onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
 export default function FirebaseLayout() {
 
+    const auth = getAuth();
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function FirebaseLayout() {
             }} />
         </Stack.Protected>
 
-        <Stack.Protected guard={authenticated} >
+        <Stack.Protected guard={authenticated}>
             <Stack.Screen name="index" options={{
                 title: "Firebase"
             }} />

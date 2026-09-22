@@ -1,16 +1,40 @@
-import MyButton from "@/components/my-button";
 import MyContainer from "@/components/my-container";
-import MyRow from "@/components/my-row";
 import MyText from "@/components/my-text";
 import MyTextInput from "@/components/my-text-input";
 import MyTitle from "@/components/my-title";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "my-text-storage-key";
 
 export default function AsyncStorageScreen() {
     // TODO: Make the text state persistent using AsyncStorage!
     const [text, setText] = useState("");
+
+    // when component mounts, load potential previous text
+    useEffect(() => {
+        loadText();
+    }, []);
+
+    useEffect(() => {
+        if (text) {
+            saveText(text);
+        }
+    }, [text]);
+
+    function saveText(t: string) {
+        AsyncStorage.setItem(STORAGE_KEY, t);
+        console.log(`saved text ${text} to async storage`);
+    }
+
+    async function loadText() {
+        const saved = await AsyncStorage.getItem(STORAGE_KEY);
+        if (saved !== null) {
+            console.log(`loaded text ${saved}`);
+            setText(saved);
+        }
+    }
 
     return <MyContainer>
         <MyTitle>Async Storage</MyTitle>
@@ -25,10 +49,5 @@ export default function AsyncStorageScreen() {
             onChange={setText}
             multiline={true}
         />
-
-        <MyRow>
-            <MyButton onPress={() => console.log("TODO: Save to AsyncStorage")} title="Save" />
-            <MyButton onPress={() => console.log("TODO: Load from AsyncStorage")} title="Load" />
-        </MyRow>
     </MyContainer>;
 }
