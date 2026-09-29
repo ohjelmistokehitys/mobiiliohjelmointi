@@ -38,6 +38,9 @@ export default function RootLayout() {
                             <Stack.Screen name="news/index" options={{
                                 title: "Latest news"
                             }} />
+                            <Stack.Screen name="(expo-sdk)/camera" options={{
+                                headerShown: false
+                            }} />
                         </Stack>
                         <StatusBar style="auto" />
                     </CalculatorProvider>

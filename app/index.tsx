@@ -18,6 +18,15 @@ export default function HomeScreen() {
         <MyText>{icon} {temp} &deg;C</MyText>
 
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollList}>
+
+            <Link href="/camera" style={styles.button}>
+                <MyLink>Camera</MyLink>
+            </Link>
+
+            <Link href="/contacts" style={styles.button}>
+                <MyLink>Contacts</MyLink>
+            </Link>
+
             <Link href="/asyncStorage" style={styles.button}>
                 <MyLink>Async Storage</MyLink>
             </Link>
